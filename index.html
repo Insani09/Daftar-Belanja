@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF‑8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Belanja</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shopping-container">
+    <h1>Daftar Belanja</h1>
+    <div class="input-area">
+      <input type="text" class="shopping-input" id="teks" placeholder="Tambah barang...">
+      <button class="add-btn" id="tombol">Tambah</button>
+    </div>
+    <ul class="shopping-list" id="daftar">
+      <li class="shopping-item">Beras</li>
+      <li class="shopping-item">Minyak Goreng</li>
+    </ul>
+  </div>
+
+
+
+  <script>
+    const teks = document.getElementById('teks');
+    const tombol = document.getElementById('tombol');
+    const daftar = document.getElementById('daftar');
+
+    tombol.addEventListener('click', function() {
+      const value = teks.value;
+      if(value !== ''){
+        const li = document.createElement('li');
+        li.textContent = value;
+        daftar.appendChild(li);
+        teks.value = '';
+      } else {
+        alert('Masukkan barang yang ingin ditambahkan! Tidak boleh kosong.');
+      }
+    });
+  </script>
+</body>
+</html>
