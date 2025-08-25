@@ -7,19 +7,17 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  
   <div class="shopping-container">
     <h1>Daftar Belanja</h1>
     <div class="input-area">
       <input type="text" class="shopping-input" id="teks" placeholder="Tambah barang...">
       <button class="add-btn" id="tombol">Tambah</button>
     </div>
-    <ul class="shopping-list" id="daftar">
-      <li class="shopping-item">Beras</li>
-      <li class="shopping-item">Minyak Goreng</li>
+    <ul class="shopping-list" id="daftar" >
+
     </ul>
   </div>
-
-
 
   <script>
     const teks = document.getElementById('teks');
@@ -30,8 +28,31 @@
       const value = teks.value;
       if(value !== ''){
         const li = document.createElement('li');
-        li.textContent = value;
+        const spanText = document.createElement('span');
+        spanText.textContent = value;
+        daftar.appendChild(spanText);
+
+        const btnEdit = document.createElement('button');
+        btnEdit.textContent = 'Edit';
+        btnEdit.style.backgroundColor = 'blue';
+        const btnHapus = document.createElement('button');
+        btnHapus.textContent = 'Hapus';
+        btnHapus.style.backgroundColor = 'red';
+
+        li.appendChild(spanText);
+        li.appendChild(btnEdit);
+        li.appendChild(btnHapus);
         daftar.appendChild(li);
+
+        btnHapus.addEventListener('click', function() {
+          daftar.removeChild(li);
+        }); 
+        btnEdit.addEventListener('click', function() {
+          const newValue = prompt('Edit barang:', spanText.textContent);
+          if(newValue !== null && newValue.trim() !== '') {
+            spanText.textContent = newValue;
+          }
+        });
         teks.value = '';
       } else {
         alert('Masukkan barang yang ingin ditambahkan! Tidak boleh kosong.');

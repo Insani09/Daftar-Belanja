@@ -77,3 +77,42 @@ li {
   font-weight: 500;
   box-shadow: 0 1px 6px rgba(44,62,80,0.12);
 }
+
+.btn-action {
+  padding: 0.4rem 0.8rem;
+  margin-left: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: opacity 0.2s;
+}
+
+.btn-edit {
+  background-color: #3498db;
+  color: white;
+}
+
+.btn-edit:hover {
+  background-color: #2980b9;
+}
+
+.btn-hapus {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.btn-hapus:hover {
+  background-color: #c0392b;
+}
+
+.item-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-text {
+  flex: 1;
+}
