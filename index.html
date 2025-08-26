@@ -19,45 +19,77 @@
     </ul>
   </div>
 
-  <script>
-    const teks = document.getElementById('teks');
-    const tombol = document.getElementById('tombol');
-    const daftar = document.getElementById('daftar');
+<script>
+  const teks = document.getElementById('teks');
+  const tombol = document.getElementById('tombol');
+  const daftar = document.getElementById('daftar');
 
-    tombol.addEventListener('click', function() {
-      const value = teks.value;
-      if(value !== ''){
+  let editMode = false;
+  let itemEdit = null;
+
+  tombol.addEventListener('click', function() {
+    const value = teks.value.trim();
+    if (value !== '') {
+      if (editMode && itemEdit) {
+        // Update mode
+        itemEdit.querySelector('.item-text').textContent = value;
+        tombol.textContent = 'Tambah';
+        editMode = false;
+        itemEdit = null;
+        teks.value = '';
+      } else {
+        // Tambah mode
         const li = document.createElement('li');
+        const itemContent = document.createElement('div');
+        itemContent.className = 'item-content';
+
         const spanText = document.createElement('span');
+        spanText.className = 'item-text';
         spanText.textContent = value;
-        daftar.appendChild(spanText);
 
         const btnEdit = document.createElement('button');
         btnEdit.textContent = 'Edit';
-        btnEdit.style.backgroundColor = 'blue';
+        btnEdit.className = 'btn-action btn-edit';
+
         const btnHapus = document.createElement('button');
         btnHapus.textContent = 'Hapus';
-        btnHapus.style.backgroundColor = 'red';
+        btnHapus.className = 'btn-action btn-hapus';
 
-        li.appendChild(spanText);
-        li.appendChild(btnEdit);
-        li.appendChild(btnHapus);
+        const btnGroup = document.createElement('div');
+        btnGroup.style.display = 'flex';
+        btnGroup.appendChild(btnEdit);
+        btnGroup.appendChild(btnHapus);
+
+        itemContent.appendChild(spanText);
+        itemContent.appendChild(btnGroup);
+        li.appendChild(itemContent);
         daftar.appendChild(li);
 
         btnHapus.addEventListener('click', function() {
           daftar.removeChild(li);
-        }); 
-        btnEdit.addEventListener('click', function() {
-          const newValue = prompt('Edit barang:', spanText.textContent);
-          if(newValue !== null && newValue.trim() !== '') {
-            spanText.textContent = newValue;
+          // Jika sedang edit item yang dihapus, reset mode
+          if (editMode && itemEdit === li) {
+            tombol.textContent = 'Tambah';
+            editMode = false;
+            itemEdit = null;
+            teks.value = '';
           }
         });
+
+        btnEdit.addEventListener('click', function() {
+          teks.value = spanText.textContent;
+          tombol.textContent = 'Update';
+          editMode = true;
+          itemEdit = li;
+          teks.focus();
+        });
+
         teks.value = '';
-      } else {
-        alert('Masukkan barang yang ingin ditambahkan! Tidak boleh kosong.');
       }
-    });
-  </script>
+    } else {
+      alert('Masukkan barang yang ingin ditambahkan! Tidak boleh kosong.');
+    }
+  });
+</script>
 </body>
 </html>
