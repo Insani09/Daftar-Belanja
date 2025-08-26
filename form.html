@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM | FORM</title>
+</head>
+<body>
+    <form name="commentForm">
+        <label for="comment">
+        comment : <input type="text" name="comment" id="comment"/>
+        
+        </label><br>
+        <label for="from">
+        from : <input type="text" name="form" id="form"/>
+        </label><br>
+        <input type="submit" value="submit"/>
+
+    </form>
+    <div id="comment-list">
+    </div>
+    <script>
+       document.querySelector("form[name=commentForm]").onsubmit = function(even){
+       const commentList = document.getElementById("comment-list");
+       const commentForm = document.getElementById("comment").value;
+       const from = document.getElementById("from").value;
+
+       const commentItem = document.createElement("p");
+       commentItem.textContent = `${comment} - ${from}`;
+       commentList.appendChild(commentItem);
+
+       document.forms["commentForm"].reset();
+       
+       even.preventDefault();
+
+       };
+    </script>
+</body>
+</html>
